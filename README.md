@@ -90,3 +90,18 @@ Ajax类
         }
         return aj;
     }
+    
+    //调用ajax类
+    var ajax=Ajax();
+    /*get使用方式*/
+    ajax.get("server.php?name=zhangsan&phone=778", function(data){                
+        alert(data); //data为从服务器端读取的数据
+    });
+    /*第一种post使用方式*/
+    ajax.post("server.php", "name=ligang&phone=222", function(data){
+        alert(data);
+    });
+    /*第二种post使用方式*/
+    ajax.post("server.php", {name:"tom",phone:"456"},function(data){
+        alert(data);
+    });
