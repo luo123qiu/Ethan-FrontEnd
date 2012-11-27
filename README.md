@@ -68,5 +68,25 @@ Ajax类
                 aj.XMLHttpRequest.send();
             }
         }
+        /*定义使用post方法传递的方法*/
+        aj.post=function(targetUrl, sendString, resultHandle){
+            aj.targetUrl=targetUrl;
+            if(typeof(sendString)=="object"){
+                var str="";
+                for(var pro in sendString){
+                    str+=pro+"="+sendString[pro]+"&";    
+                }
+                aj.sendString=str.substr(0, str.length-1);
+            }else{
+                aj.sendString=sendString;
+            }
+            if(resultHandle!=null){
+                aj.XMLHttpRequest.onreadystatechange=aj.processHandle;    
+                aj.resultHandle=resultHandle;    
+            }
+            aj.XMLHttpRequest.open("post", targetUrl);
+            aj.XMLHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            aj.XMLHttpRequest.send(aj.sendString);  
+        }
         return aj;
     }
